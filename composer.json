@@ -1,0 +1,65 @@
+{
+  "name": "bbrist/laravel-console-logger",
+  "version": "0.1.0",
+  "description": "Log to console during artisan commands",
+  "keywords": [
+    "async",
+    "laravel-console-logger",
+    "artisan",
+    "async-software",
+    "async-solutions",
+    "async-software-solutions",
+    "laravel",
+    "console",
+    "logging",
+    "logger"
+  ],
+  "homepage": "https://github.com/bbrist/laravel-console-logger",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Brett Brist",
+      "email": "brettbrist@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "laravel/framework": "^9.0",
+    "symfony/console": "^v6.1.1"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.5.6",
+    "pestphp/pest": "^1.20"
+  },
+  "scripts": {
+    "analyse": "vendor/bin/phpstan analyse",
+    "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
+    "test": "vendor/bin/pest"
+  },
+  "autoload": {
+    "psr-4": {
+      "Bbrist\\Console\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Bbrist\\Console\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Bbrist\\Console\\ServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
