@@ -11,19 +11,17 @@ class ServiceProvider extends LaravelServiceProvider
 
     public function register()
     {
-        if ($this->app->runningInConsole()) {
-            $this->mergeConfigFrom(__DIR__ . '/../config/logging.php', 'logging');
+        $this->mergeConfigFrom(__DIR__ . '/../config/logging.php', 'logging');
 
-            $adapter = new ConsoleLogAdapter(new ConsoleOutput());
+        $adapter = new ConsoleLogAdapter(new ConsoleOutput());
 
-            $this->app->instance(ConsoleLogAdapter::class, $adapter);
-            $this->app->extend('log', function ($logger) use ($adapter) {
-                $logMethods = Config::get('logging.console.logMethods', []);
-                $logToFile = Config::get('logging.console.logToFile', false);
+        $this->app->instance(ConsoleLogAdapter::class, $adapter);
+        $this->app->extend('log', function ($logger) use ($adapter) {
+            $logMethods = Config::get('logging.console.logMethods', []);
+            $logToFile = Config::get('logging.console.logToFile', false);
 
-                return new ConsoleAwareLogger($logger, $adapter, $logMethods, $logToFile);
-            });
-        }
+            return new ConsoleAwareLogger($logger, $adapter, $logMethods, $logToFile);
+        });
     }
 
 }
