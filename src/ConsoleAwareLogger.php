@@ -41,24 +41,25 @@ class ConsoleAwareLogger
     public function __call($method, $parameters)
     {
         if (!app()->runningInConsole()) {
-            $this->callRoot($method, $parameters);
-            return;
+            return $this->callRoot($method, $parameters);
         }
 
         if ($adapterHasMethod = in_array($method, array_keys(static::$methods))) {
             if ($this->verbosityTest($method)) {
-                $this->consoleLogAdapter->$method(...$parameters);
+                $value = $this->consoleLogAdapter->$method(...$parameters);
             }
         }
 
         if (!$adapterHasMethod || $this->logToFile || $this->includedMethod($method)) {
-            $this->callRoot($method, $parameters);
+            return $this->callRoot($method, $parameters);
         }
+        
+        return $value;
     }
 
     protected function callRoot($method, $parameters)
     {
-        $this->root->$method(...$parameters);
+        return $this->root->$method(...$parameters);
     }
 
     protected function includedMethod(string $method)
