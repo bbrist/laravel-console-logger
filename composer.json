@@ -1,6 +1,6 @@
 {
   "name": "bbrist/laravel-console-logger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Log to console during artisan commands",
   "keywords": [
     "async",
